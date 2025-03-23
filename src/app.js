@@ -1,10 +1,15 @@
-const express = require("express")
-const app =express();
-app.get("/user",(req, res)=>{
-    res.send("server run")
-})
+const express = require("express");
+const connectDB = require("./config/database.js"); // Import the database connection function
 
-app.listen(3000, ()=>{
-    console.log("server is successfu;;y listening on port 3000...");
-    
-})
+const app = express();
+
+// Connect to MongoDB
+connectDB();
+
+app.get("/", (req, res) => {
+  res.send("Server is running...");
+});
+
+const PORT = 5000;
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+
