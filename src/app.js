@@ -1,15 +1,14 @@
-const express = require("express");
-const connectDB = require("./config/database.js"); // Import the database connection function
-
+const express = require('express');
 const app = express();
+const { dbConnection } = require('./config/database')
 
-// Connect to MongoDB
-connectDB();
-
-app.get("/", (req, res) => {
-  res.send("Server is running...");
-});
-
-const PORT = 5000;
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
-
+const PORT = process.env.PORT || 8000;
+dbConnection().then(()=>{
+  console.log('Database is successfully connected!')
+  app.listen(PORT, () => {
+    console.log(`Server is running on ${PORT}`)
+  })
+}).catch((err)=>{
+  console.log("databased not connect",err);
+    
+})
