@@ -4,14 +4,11 @@ const { dbConnection } = require('./config/database')
 const PORT = process.env.PORT || 8000;
 const User = require("./models/user")
 
+app.use(express.json());
+
 app.post("/signup", async(req, res) => {
   // creating a new instance of the user models 
-  const user = new User({
-    firstName: "sachin",
-    lastName: "tendulkar",
-    emailId: "sachin@tendulkar.com",
-    password: "sachin@1234"
-  });
+  const user = new User(req.body);
 
  try {
   await user.save();
@@ -20,7 +17,7 @@ app.post("/signup", async(req, res) => {
   res.status(400).send("error saving the user:",err.message)
  }
 
-})
+});
 
 
 
