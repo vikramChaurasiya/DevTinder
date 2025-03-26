@@ -4,7 +4,7 @@ const { dbConnection } = require('./config/database')
 const PORT = process.env.PORT || 8000;
 const User = require("./models/user")
 
-app.use(express.json());
+app.use(express.json()); // it is middleware here use is middleware convert json data in js object .
 
 app.post("/signup", async(req, res) => {
   // creating a new instance of the user models 
@@ -19,6 +19,30 @@ app.post("/signup", async(req, res) => {
 
 });
 
+//it is find user through searching email 
+app.get("/user", async(req,res)=>{
+  const userEmail = req.body.emailId;
+  try {
+    const users = await User.findOne({emailId: userEmail});
+    if (users.length === 0) {
+      res.status(404).send("user can't found");
+    }else{
+      res.send(users)
+    }
+  } catch (err) {
+    res.status(400).send("something went wrong")
+  }
+})
+
+//it has all without any searching same like feed
+app.get("/feed", async(req, res)=>{
+  try {
+    const users = await User.find();
+    res.send(users)
+  } catch (err) {
+    res.status(400).send("something went wrong")
+  }
+})
 
 
 dbConnection()
