@@ -68,14 +68,14 @@ app.patch("/user", async(req,res)=>{
   }
 })
 
-app.get("/users", async (req,res)=>{
+app.patch("/users", async (req,res)=>{
   const userEmail = req.body.emailId;
   console.log(userEmail);
   
   const data = req.body;
   
   try {
-    await User.findByIdAndUpdate({emailId:userEmail}, data);
+    await User.findOneAndUpdate({emailId:userEmail}, data);
     res.send("user data is successfully updated ")
   } catch (err) {
     res.status(400).send("something went wrong" + err.message)
