@@ -14,7 +14,7 @@ app.post("/signup", async(req, res) => {
   await user.save();
   res.send("User added successfully");
  } catch (err) {
-  res.status(400).send("error saving the user:",err.message)
+  res.status(400).send("error saving the user:"+ err.message)
  }
 
 });
@@ -30,7 +30,7 @@ app.get("/user", async(req,res)=>{
       res.send(users)
     }
   } catch (err) {
-    res.status(400).send("something went wrong")
+    res.status(400).send("something went wrong" +err.message)
   }
 })
 
@@ -40,7 +40,7 @@ app.get("/feed", async(req, res)=>{
     const users = await User.find();
     res.send(users)
   } catch (err) {
-    res.status(400).send("something went wrong")
+    res.status(400).send("something went wrong"+err.message)
   }
 })
 
@@ -52,7 +52,7 @@ app.delete("/user" , async(req,res) =>{
     const user = await User.findByIdAndDelete({_id:userId});
     res.send("user deleted successfully")
   } catch (err) {
-    res.status(400).send("somthing went wrong")
+    res.status(400).send("somthing went wrong"+err.message)
   }
 })
 
@@ -62,10 +62,25 @@ app.patch("/user", async(req,res)=>{
   const data = req.body;
   try {
     await User.findByIdAndUpdate({_id:userId}, data);
-    res.send("User is successfully update")
+    res.send("User is successfully updated")
   } catch (err) {
     res.status(400).send("Something went wrong ")
   }
+})
+
+app.get("/users", async (req,res)=>{
+  const userEmail = req.body.emailId;
+  console.log(userEmail);
+  
+  const data = req.body;
+  
+  try {
+    await User.findByIdAndUpdate({emailId:userEmail}, data);
+    res.send("user data is successfully updated ")
+  } catch (err) {
+    res.status(400).send("something went wrong" + err.message)
+  }
+
 })
 
 dbConnection()
