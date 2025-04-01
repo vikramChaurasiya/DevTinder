@@ -2,19 +2,36 @@ const express = require('express');
 const app = express();
 const { dbConnection } = require('./config/database')
 const PORT = process.env.PORT || 8000;
-const User = require("./models/user")
+const User = require("./models/user");
+const {validateSignUpData} = require("./utils/validation");
+const bcrypt = require("bcrypt");
 
 app.use(express.json()); // it is middleware here use is middleware convert json data in js object .
 
 app.post("/signup", async(req, res) => {
-  // creating a new instance of the user models 
-  const user = new User(req.body);
 
- try {
-  await user.save();
-  res.send("User added successfully");
+  try {
+    //validation of data
+    validateSignUpData(req)
+
+    //Encrypt the password
+    const {firstName,lastName,emailId,password} = req.body;
+    const passwordHash = await bcrypt.hash(password, 10);
+    console.log(passwordHash);
+    
+    // creating a new instance of the user models 
+    const user = new User({
+      firstName,
+      lastName,
+      emailId,
+      password:passwordHash,
+    });
+
+ 
+    await user.save();
+    res.send("User added successfully");
  } catch (err) {
-  res.status(400).send("error saving the user:"+ err.message)
+  res.status(400).send("ERROR:"+ err.message)
  }
 
 });
