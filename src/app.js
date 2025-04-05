@@ -5,8 +5,12 @@ const PORT = process.env.PORT || 8000;
 const User = require("./models/user");
 const {validateSignUpData} = require("./utils/validation");
 const bcrypt = require("bcrypt");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
+
 
 app.use(express.json()); // it is middleware here use is middleware convert json data in js object .
+app.use(cookieParser())
 
 app.post("/signup", async(req, res) => {
 
@@ -43,8 +47,17 @@ app.post("/login" , async(req,res)=>{
     if(!user){
       throw new Error("Invalid credentials!!");
     }
-    const isPasswordValid = bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
     if(isPasswordValid){
+
+      // create a JWT token
+      const tokenPassword = "DEV@Tinder$754";
+      const token = await jwt.sign({_id: user._id}, tokenPassword);
+      // console.log(token);
+      
+
+      // Add the token to cookie and send the response back the user
+      res.cookie("token", token);
       res.send("Login successful!! ")
     }else{
       throw new Error("Invalid credentials!!")
@@ -54,6 +67,31 @@ app.post("/login" , async(req,res)=>{
     res.status(400).send("ERROR : " + err.message)
   }
 });
+
+// profile API
+app.get("/profile", async(req, res)=>{
+  try {
+    const cookies = req.cookies;
+    const {token} = cookies;
+    // validate my token
+    if (!token) {
+      throw new Error("invalid Token")
+    }
+    const tokenPassword = "DEV@Tinder$754";
+    const decodedMesssage = await jwt.verify(token,tokenPassword)
+    const{_id} = decodedMesssage;
+    // console.log("Logged In user is: " + _id);   
+    const user =  await User.findById(_id);
+    if(!user){
+      throw new Error("User doesn't found");
+    }
+
+    res.send(user);
+  } catch (err) {
+    res.status(400).send("ERROR : "+err.message)
+  }
+})
+
 
 //it is find user through searching email 
 app.get("/user", async(req,res)=>{
