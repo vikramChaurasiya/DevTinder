@@ -85,7 +85,7 @@ app.get("/profile", async(req, res)=>{
     if(!user){
       throw new Error("User doesn't found");
     }
-
+ 
     res.send(user);
   } catch (err) {
     res.status(400).send("ERROR : "+err.message)
