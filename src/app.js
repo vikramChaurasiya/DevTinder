@@ -6,7 +6,7 @@ const User = require("./models/user");
 const {validateSignUpData} = require("./utils/validation");
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
+const {userAuth}= require("./middlewares/auth");
 
 
 app.use(express.json()); // it is middleware here use is middleware convert json data in js object .
@@ -21,7 +21,7 @@ app.post("/signup", async(req, res) => {
     //Encrypt the password
     const {firstName,lastName,emailId,password} = req.body;
     const passwordHash = await bcrypt.hash(password, 10);
-    console.log(passwordHash);
+    // console.log(passwordHash);
     
     // creating a new instance of the user models 
     const user = new User({
@@ -47,17 +47,16 @@ app.post("/login" , async(req,res)=>{
     if(!user){
       throw new Error("Invalid credentials!!");
     }
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await user.validatePassword(password);
+    
     if(isPasswordValid){
 
-      // create a JWT token
-      const tokenPassword = "DEV@Tinder$754";
-      const token = await jwt.sign({_id: user._id}, tokenPassword);
-      // console.log(token);
+      const token = await user.getJWT();
       
-
       // Add the token to cookie and send the response back the user
-      res.cookie("token", token);
+      res.cookie("token", token , {
+        expires: new Date(Date.now()+8*3600000)
+      });
       res.send("Login successful!! ")
     }else{
       throw new Error("Invalid credentials!!")
@@ -69,112 +68,23 @@ app.post("/login" , async(req,res)=>{
 });
 
 // profile API
-app.get("/profile", async(req, res)=>{
+app.get("/profile",userAuth, async(req, res)=>{
+  //here in userAuth is middleware
   try {
-    const cookies = req.cookies;
-    const {token} = cookies;
-    // validate my token
-    if (!token) {
-      throw new Error("invalid Token")
-    }
-    const tokenPassword = "DEV@Tinder$754";
-    const decodedMesssage = await jwt.verify(token,tokenPassword)
-    const{_id} = decodedMesssage;
-    // console.log("Logged In user is: " + _id);   
-    const user =  await User.findById(_id);
-    if(!user){
-      throw new Error("User doesn't found");
-    }
- 
+    const user = req.user;
     res.send(user);
   } catch (err) {
     res.status(400).send("ERROR : "+err.message)
   }
 })
 
-
-//it is find user through searching email 
-app.get("/user", async(req,res)=>{
-  const userEmail = req.body.emailId;
-  try {
-    const users = await User.findOne({emailId: userEmail});
-    if (users.length === 0) {
-      res.status(404).send("user can't found");
-    }else{
-      res.send(users)
-    }
-  } catch (err) {
-    res.status(400).send("something went wrong" +err.message)
-  }
+app.post("/sendConnectionRequest", userAuth , async (req,res)=>{
+  const user = req.user;
+  // sending a connection request
+  console.log("Sending a connection request");
+  res.send(user.firstName + "sent the connection request");
 })
-
-//it has all without any searching same like feed
-app.get("/feed", async(req, res)=>{
-  try {
-    const users = await User.find();
-    res.send(users)
-  } catch (err) {
-    res.status(400).send("something went wrong"+err.message)
-  }
-})
-
-//delete user from the databased 
-
-app.delete("/user" , async(req,res) =>{
-  const userId = req.body.userId;
-  try {
-    const user = await User.findByIdAndDelete({_id:userId});
-    res.send("user deleted successfully")
-  } catch (err) {
-    res.status(400).send("somthing went wrong"+err.message)
-  }
-})
-
-//update date from database.
-app.patch("/user/:userId", async(req,res)=>{
-  const userId = req.params?.userId;
-  const data = req.body;
-
-  try {
-    const ALLOWED_UPDATES = [
-      "photoUrl",
-      "about",
-      "gender",
-      "age",
-      "skills",
-    ];
-    const isUpdateAllowed = Object.keys(data).every((k)=>
-      ALLOWED_UPDATES.includes(k)
-    );
-    if(!isUpdateAllowed){
-      throw new Error("Update not allowed")
-    }
-    if(data?.skills.length > 10){
-      throw new Error("Skills cannot more than 10 ")
-    }
-    const user = await User.findByIdAndUpdate({_id:userId}, data ,{
-      returnDocument:'after',
-      returnValidators:true,
-    });
-    console.log(user);
-    res.send("User is successfully updated")
-  } catch (err) {
-    res.status(400).send("UPDATE FAILED "+err.message)
-  }
-})
-
-app.patch("/users  ", async (req,res)=>{
-  const userEmail = req.body.emailId;
-  const data = req.body;
-  
-  try {
-    await User.findOneAndUpdate({emailId:userEmail}, data);
-    res.send("user data is successfully updated ")
-  } catch (err) {
-    res.status(400).send("something went wrong" + err.message)
-  }
-
-})
+ 
 
 dbConnection()
 .then(()=>{
