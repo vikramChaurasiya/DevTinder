@@ -63,7 +63,7 @@ requestRouter.post("/request/review/:status/:requestId", userAuth, async(req, re
             return res.status(400).json({ message : "Status not allowed!"})
         }
 
-        // requestId find in database call 
+        // requestId find in database call  
         const connectionRequest = await ConnectionRequest.findOne({
             _id: requestId,
             toUserId:loggedInUser._id,
