@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
-const { stripLow } = require('validator');
-const { create } = require('./user');
 
 const connectionRequestSchema = new mongoose.Schema(
     {
         fromUserId:{
             type: mongoose.Schema.Types.ObjectId,
+            ref: "User", //refernce to the user collection
             required: true,
         },
         toUserId:{
