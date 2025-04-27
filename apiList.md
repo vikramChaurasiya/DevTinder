@@ -20,7 +20,7 @@
 
 ## userRouter
 - GET /user/connection
-- GET /user/request
+- GET /user/request/received
 - GET /user/feed - Gets you the profiles of other users on platform
 
 
