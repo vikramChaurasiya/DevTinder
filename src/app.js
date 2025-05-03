@@ -6,7 +6,12 @@ const cookieParser = require("cookie-parser");
 const cors = require('cors');
 
 
-app.use(cors());
+app.use(cors(
+  {
+    origin:"http://localhost:5173",
+    credentials: true, 
+  }
+));
 app.use(express.json()); // it is middleware here use is middleware convert json data in js object .
 app.use(cookieParser())
 
