@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import axios from "axios";
 
 const Login = () => {
-  const [emailId, setEmailId] = useState("kuhu@gmail.com");
-  const [password, setPassword] = useState("Vikram@123");
+  const [emailId, setEmailId] = useState("");
+  const [password, setPassword] = useState("");
   const handleLogin = async()=> {
     try {
       const res = await axios.post("http://localhost:8000/login", 
