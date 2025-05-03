@@ -3,9 +3,10 @@ const app = express();
 const { dbConnection } = require('./config/database')
 const PORT = process.env.PORT || 8000;
 const cookieParser = require("cookie-parser");
+const cors = require('cors');
 
 
-
+app.use(cors());
 app.use(express.json()); // it is middleware here use is middleware convert json data in js object .
 app.use(cookieParser())
 
