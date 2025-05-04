@@ -15,3 +15,7 @@
 - Install npm install @reduxjs/toolkit react-redux
 - Read about Redux toolkit https://redux-toolkit.js.org/tutorials/quick-start
 - install @reduxjs/toolkit + react-redux => create appStore => add provider => createSlice => add reducer to the store
+- add redux devtools in your browser
+- login and see if your data is coming properly in the store
+- NavBar should update as soon as user login
+- Refacter our code to add constrants file + create a component folder
