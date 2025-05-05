@@ -19,3 +19,5 @@
 - login and see if your data is coming properly in the store
 - NavBar should update as soon as user login
 - Refacter our code to add constrants file + create a component folder
+- You should not be access other routes without login
+- if token is not present, redirect in login page
