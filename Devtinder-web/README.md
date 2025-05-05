@@ -21,3 +21,4 @@
 - Refacter our code to add constrants file + create a component folder
 - You should not be access other routes without login
 - if token is not present, redirect in login page
+- Add logout feature
