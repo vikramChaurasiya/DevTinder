@@ -22,3 +22,5 @@
 - You should not be access other routes without login
 - if token is not present, redirect in login page
 - Add logout feature
+- get the feed and add the feed in the store 
+- build the user card in feed page 
