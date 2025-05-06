@@ -26,7 +26,6 @@ const Login = () => {
       return navigate('/')
     } catch (err) {
       setError(err?.response?.data || "Something went wrong ");
-      console.error(err);
     }
   }
 
@@ -34,7 +33,7 @@ const Login = () => {
   return (
     <>
       <div className='flex justify-center my-10'>
-        <div className="card bg-primary text-primary-content w-96">
+        <div className="card bg-base-200 text-primary-content w-96">
           <div className="card-body">
             <h2 className="card-title justify-center">Login</h2>
             <div>
@@ -96,7 +95,7 @@ const Login = () => {
             </div>
             <p className='text-red-500'>{error}</p>
             <div className="card-actions justify-center">
-              <button className="btn" onClick={handleLogin}>Login</button>
+              <button className="btn btn-outline btn-success" onClick={handleLogin}>Login</button>
             </div>
           </div>
         </div>    
