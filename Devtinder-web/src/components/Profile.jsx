@@ -8,7 +8,6 @@ const Profile = () => {
      user&&(
      <>
        <EditProfile user = {user}/>
-       {/* <h1>profile</h1> */}
      </>
     )
   );
