@@ -75,16 +75,18 @@ const EditProfile = ({user}) => {
                             </label>
                         </div>
                         <div>
-                            <input 
-                                type="file" 
-                                className="file-input" 
-                                placeholder='Edit'
-                                onChange={handleFileChange}
-                            />
-                            {/* {photoUrl && (
-                                <img src={photoUrl} alt="Selected" className="mt-4 w-32 h-32 object-cover" />
-                            // )}  if you need below photo see*/} 
+                            <label className="input validator">
+                                <div className='label'>
+                                    <span className='label-text'>PhotoUrl:</span>
+                                </div>
+                                <input 
+                                    type='text'
+                                    value={photoUrl}
+                                    onChange={(e) => setPhotoUrl(e.target.value)}
+                                />
+                            </label>
                         </div>
+                        
                         <div>
                             <label className="input validator">
                                 <div className='label'>
