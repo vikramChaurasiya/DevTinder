@@ -24,3 +24,6 @@
 - Add logout feature
 - get the feed and add the feed in the store 
 - build the user card in feed page 
+- Edit Profile Feature
+- Show Teast Message on save of profile 
+- see all my connections 
