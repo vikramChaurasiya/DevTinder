@@ -26,4 +26,7 @@
 - build the user card in feed page 
 - Edit Profile Feature
 - Show Teast Message on save of profile 
-- see all my connections 
+- New Page - see all my connections 
+- New Page - see all my connection request
+- New Page - show connecion request
+- Feature - Accept/Reject connect request
