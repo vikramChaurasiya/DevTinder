@@ -41,10 +41,10 @@ const Connections = () => {
             key={_id}
             className="flex m-4 p-4 rounded-lg bg-base-300 w-1/2 mx-auto"
           >
-            <div>
+            <div className="w-20 h-20 overflow-hidden rounded-full">
               <img
                 alt="photo"
-                className="w-20 h-20 rounded-full object-cover"
+                className="w-full h-full object-cover"
                 src={photoUrl}
               />
             </div>
