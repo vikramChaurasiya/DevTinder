@@ -30,3 +30,4 @@
 - New Page - see all my connection request
 - New Page - show connecion request
 - Feature - Accept/Reject connect request
+- Send/ignore the user card from the feed
