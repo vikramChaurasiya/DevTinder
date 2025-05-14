@@ -111,6 +111,7 @@ const EditProfile = ({user}) => {
                                 />
                             </label>
                         </div>
+                        
                         <div>
                             <legend className="fieldset-legend">About</legend>
                             <label>
