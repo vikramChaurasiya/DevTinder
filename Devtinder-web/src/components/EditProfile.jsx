@@ -45,7 +45,7 @@ const EditProfile = ({user}) => {
 
   return (
     <>
-        <div className='flex justify-center m-30 gap-5'>
+        <div className='flex justify-center m-20 gap-5'>
             <div className='flex justify-center '>
                 <div className="card bg-base-200 text-primary-content w-96">
                     <div className="card-body">
@@ -93,8 +93,8 @@ const EditProfile = ({user}) => {
                                     <span className='label-text'>Age</span>
                                 </div>
                                 <input 
-                                    type='text'
-                                    value={age}
+                                    type='number'
+                                    value={age|| ""}
                                     onChange={(e) => setAge(e.target.value)}  
                                 />
                             </label>
@@ -126,7 +126,7 @@ const EditProfile = ({user}) => {
                                     placeholder="About" 
                                     value={about}
                                     onChange={(e) => setAbout(e.target.value)}  
-                                >About</textarea>
+                                />
                             </label>
                         </div>
                         <p className='text-red-500'>{error}</p>
