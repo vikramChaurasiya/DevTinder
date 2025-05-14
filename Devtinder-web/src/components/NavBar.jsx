@@ -33,7 +33,8 @@ const NavBar = () => {
                       <div className="w-10 rounded-full">
                         <img
                           alt="user photo"
-                          src= {user.photoUrl} />
+                          src={user.photoUrl || "https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001884.png"} 
+                        />
                       </div>
                     </div>
                   <ul
