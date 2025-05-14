@@ -6,9 +6,16 @@ import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../utils/constants';
 
 const Login = () => {
-  const [emailId, setEmailId] = useState("vikram@gmail.com");
-  const [password, setPassword] = useState("Vikram@123");
+  const [emailId, setEmailId] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [age, setAge] = useState("");
+  const [photoUrl, setPhotoUrl] = useState("");
+  const [gender, setGender] = useState("");
+  const [about, setAbout] = useState("");
   const [error, setError] = useState("");
+  const[isLoginForm, SetIsLoginForm] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -29,16 +36,111 @@ const Login = () => {
     }
   }
 
+  const handleSignUp = async() => {
+    try {
+      const res = await axios.post(
+        BASE_URL + "/signup", 
+        {firstName, lastName, age, photoUrl, gender, about, emailId, password },
+        {withCredentials:true},
+      );
+      dispatch(addUser(res.data.data));
+      return navigate("/profile")
+    } catch (err) {
+      setError(err?.response?.data || "Something went wrong ");
+    }
+  }
+
 
   return (
     <>
       <div className='flex justify-center my-10'>
         <div className="card bg-base-200 text-primary-content w-96">
           <div className="card-body">
-            <h2 className="card-title justify-center">Login</h2>
+            <h2 className="card-title justify-center">{isLoginForm? "Login": "signUp"}</h2>
             <div>
-              <label className="input validator">
-                
+              {!isLoginForm &&
+              <div className='flex flex-col gap-2'>
+                <label className="input validator">
+                  <div className='label'>
+                      <span className='label-text'>FirstName</span>
+                  </div>
+                  <input 
+                    type='text'
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </label>
+                <label className="input validator">
+                  <div className='label'>
+                      <span className='label-text'>LastName</span>
+                  </div>
+                  <input 
+                    type='text'
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
+                </label>
+                <label className="input validator">
+                  <div className='label'>
+                      <span className='label-text'>Age</span>
+                  </div>
+                  <input 
+                    type='number'
+                    value={age}
+                    onChange={(e) => setAge(e.target.value)}
+                  />
+                </label>
+                <label className="input validator">
+                  <div className='label'>
+                      <span className='label-text'>PhotoUrl</span>
+                  </div>
+                  <input 
+                      type='text'
+                      value={photoUrl}
+                      onChange={(e) => setPhotoUrl(e.target.value)}
+                  />
+                </label>
+                <div>
+                  <p>Selected Gender: </p>
+                  <div className='flex flex-row gap-3'>
+                    <label>
+                      <input
+                        type="radio"
+                        className='radio radio-sm'
+                        value="male"
+                        checked={gender === "male"}
+                        onChange={(e) => setGender(e.target.value)}
+                      />
+                      <span className='m-2'>Male</span>
+                    </label>
+                    <label>
+                      <input
+                        type="radio"
+                        className='radio radio-sm'
+                        value="female"
+                        checked={gender === "female"}
+                        onChange={(e) => setGender(e.target.value)}
+                      />
+                      <span className='m-2'>Female</span>
+                    </label>
+                  </div>
+                </div>
+              <div>
+                <label>
+                  <div className='label'>
+                      <span className='label-text'>About</span>
+                  </div>
+                  <textarea 
+                      className="textarea" 
+                      placeholder="About" 
+                      value={about}
+                      onChange={(e) => setAbout(e.target.value)}  
+                  />
+                </label>
+              </div>
+              </div>
+              }
+              <label className="input validator mt-2">
                 <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                   <g
                     strokeLinejoin="round"
@@ -95,8 +197,11 @@ const Login = () => {
             </div>
             <p className='text-red-500'>{error}</p>
             <div className="card-actions justify-center">
-              <button className="btn btn-outline btn-success" onClick={handleLogin}>Login</button>
+              <button className="btn btn-outline btn-success" onClick={isLoginForm ? handleLogin : handleSignUp}>
+                {isLoginForm? "Login" : "Sign Up"}
+              </button>
             </div>
+            <p className='m-auto text-blue-300 hover:text-blue-500 cursor-pointer' onClick={() => SetIsLoginForm((value) => !value)}>{isLoginForm? "New User? SignUp Here": "Existing User? Login Here"}</p>
           </div>
         </div>    
       </div>
