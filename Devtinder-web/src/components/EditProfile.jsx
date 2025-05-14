@@ -112,15 +112,9 @@ const EditProfile = ({user}) => {
                             </label>
                         </div>
                         <div>
+                            <legend className="fieldset-legend">About</legend>
                             <label>
-                                <div className='label'>
-                                    <span className='label-text'>About</span>
-                                </div>
-                                {/* <input 
-                                    type='text-area'
-                                    value={about}
-                                    onChange={(e) => setAbout(e.target.value)}  
-                                /> */}
+                                
                                 <textarea 
                                     className="textarea" 
                                     placeholder="About" 
