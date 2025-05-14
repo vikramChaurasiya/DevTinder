@@ -26,8 +26,8 @@ const Usercard = ({user}) => {
     }
 
   return (
-    <div className="w-full flex justify-center p-1 mb-30">
-        <div className="card bg-base-200 w-ful max-w-xs sm:max-w-sm md:max-w-md shadow-lg">
+    <div className="w-full flex justify-center mb-30">
+        <div className="card bg-base-200 w-full max-w-xs sm:max-w-sm md:max-w-md shadow-lg">
             <figure className="px-6 pt-6">
               <img
                 src={photoUrl || "https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001884.png"}
