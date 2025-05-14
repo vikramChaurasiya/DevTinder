@@ -30,7 +30,7 @@ const Usercard = ({user}) => {
         <div className="card bg-base-200 w-96 shadow-sm">
             <figure className="px-10 pt-10">
               <img
-                src={photoUrl}
+                src={photoUrl || "https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001884.png"}
                 alt="photo"
                 className="rounded-xl" />
             </figure>
