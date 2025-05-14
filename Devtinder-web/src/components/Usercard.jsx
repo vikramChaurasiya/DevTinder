@@ -26,21 +26,23 @@ const Usercard = ({user}) => {
     }
 
   return (
-    <div>
-        <div className="card bg-base-200 w-96 shadow-sm">
-            <figure className="px-10 pt-10">
+    <div className="w-full flex justify-center p-1 mb-30">
+        <div className="card bg-base-200 w-ful max-w-xs sm:max-w-sm md:max-w-md shadow-lg">
+            <figure className="px-6 pt-6">
               <img
                 src={photoUrl || "https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001884.png"}
                 alt="photo"
-                className="rounded-xl" />
+                className="rounded-xl w-32 h-32 object-cover" />
             </figure>
             <div className="card-body items-center text-center">
-              <h2 className="card-title">{firstName + " " + lastName}</h2>
-              {age && gender && <p>{age + " " + gender}</p>}
-              <p>{about}</p>
-              <div className="card-actions">
-                <button className="btn btn-primary" onClick={() => handelSendRequest("ignored", _id)}>Ignore</button> 
-                <button className="btn btn-primary" onClick={() => handelSendRequest("interested" , _id)} >Interested</button>
+              <h2 className="card-title text-base md:text-lg">{firstName + " " + lastName}</h2>
+              {age && gender && (
+                <p className ="text-gray-500 text-sm md:text-base">{age} years • {gender}</p>
+              )}
+              {about && <p className="text-sm md:text-base">{about}</p>}
+              <div className="card-actions mt-4 flex flex-col sm:flex-row gap-2 w-full justify-center">
+                <button className="btn btn-outline btn-error w-full sm:w-auto" onClick={() => handelSendRequest("ignored", _id)}>Ignore</button> 
+                <button className="btn btn-primary w-full sm:w-auto" onClick={() => handelSendRequest("interested" , _id)} >Interested</button>
               </div>
             </div>
         </div>

@@ -45,9 +45,9 @@ const EditProfile = ({user}) => {
 
   return (
     <>
-        <div className='flex justify-center m-20 gap-5'>
-            <div className='flex justify-center '>
-                <div className="card bg-base-200 text-primary-content w-96">
+        <div className='flex flex-col md:flex-row items-center justify-center m-4 md:m-20 gap-5 p-4'>
+            <div className='w-full max-w-md'>
+                <div className="card bg-base-200 text-primary-content shadow-lg">
                     <div className="card-body">
                         <h2 className="card-title justify-center">Edit Profile</h2>
                         <div>
