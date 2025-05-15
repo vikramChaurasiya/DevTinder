@@ -45,10 +45,10 @@ const EditProfile = ({user}) => {
 
   return (
     <>
-        <div className='flex flex-col md:flex-row items-center justify-center m-4 md:m-20 gap-5 p-4'>
+        <div className='flex flex-col  md:flex-row md:gap-0 items-center  m-4 md:mt-20 md:px-40 gap-5  px-8 '>
             <div className='w-full max-w-md'>
-                <div className="card bg-base-200 text-primary-content shadow-lg">
-                    <div className="card-body">
+                <div className="card bg-base-200 text-primary-content shadow-lg md:mx-10 ">
+                    <div className="card-body md:mx-auto">
                         <h2 className="card-title justify-center">Edit Profile</h2>
                         <div>
                             <label className="input validator">
