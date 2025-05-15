@@ -22,13 +22,13 @@ const NavBar = () => {
 
   return (
     <>
-        <div className="navbar bg-base-300 shadow-sm  flex-wrap sm:flex-nowrap">
+        <div className="navbar bg-base-300 shadow-sm  flex-wrap sm:flex-nowrap ">
             <div className="flex-1">
                 <Link to="/" className="btn btn-ghost text-xl pl-0.5">👋IshqRaah</Link>
             </div>
             {user && 
               <div className="flex items-center gap-2 mt-2 sm:mt-0 flex-wrap sm:flex-nowrap">
-                <p className='text-sm sm:text-base font-medium whitespace-nowrap'>Welcome, {user.firstName}</p>
+                <p className='text-sm md:text-xl sm:text-base font-medium whitespace-nowrap'>Welcome, {user.firstName}</p>
                 <div className="dropdown dropdown-end ml-2">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                       <div className="w-10 rounded-full">

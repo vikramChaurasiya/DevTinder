@@ -53,7 +53,7 @@ const Login = () => {
 
   return (
     <>
-      <div className='flex justify-center my-10'>
+      <div className='flex justify-center my-10 mb-35 md:mb-0'>
         <div className="card bg-base-200 text-primary-content w-96">
           <div className="card-body">
             <h2 className="card-title justify-center">{isLoginForm? "Login": "signUp"}</h2>
