@@ -38,7 +38,7 @@ const Request = () => {
   },[])
   if (!requests) return null;
 
-  if (requests.length === 0) return <h1 className="text-center text-3xl mt-20 text-red-700"> No Requests Found</h1>;
+  if (requests.length === 0) return <h1 className="text-center font-bold text-2xl mt-10 text-red-700"> No Requests Found</h1>;
 
   return (
     <div className="text-center my-10">
