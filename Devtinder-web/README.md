@@ -32,3 +32,10 @@
 - Feature - Accept/Reject connect request
 - Send/ignore the user card from the feed
 - build signUP page 
+- 
+
+
+
+
+```AWS ```
+- create aws Account
