@@ -3,7 +3,7 @@
  - node_modules, package.json, package-lock.json
  - Install express 
  - Create a server
- - Listen to port 7777
+ - Listen to port 8000
  - Write request handlers for /test , /hello
  - Install nodemon and update scripts inside package.json
  - What are dependencies
