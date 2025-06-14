@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const validator = require('validator')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
 
 const userSchema = new mongoose.Schema(
     {
@@ -75,7 +77,7 @@ const userSchema = new mongoose.Schema(
 
 userSchema.methods.getJWT = async function(){
     const user = this;
-    const TOKENPASS = "DEV@Tinder$754";
+    const TOKENPASS = process.env.JWT_TOKEN;
     const token = await jwt.sign({_id: user._id}, TOKENPASS , {expiresIn: "7d"});
     return token;
 };

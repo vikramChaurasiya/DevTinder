@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const { dbConnection } = require('./config/database')
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT;
 const cookieParser = require("cookie-parser");
 const cors = require('cors');
 
