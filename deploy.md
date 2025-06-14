@@ -20,7 +20,8 @@
 
     - delete process :- pm2 delete <name>
 
-    - if create process custome name :- pm2 start npm --name "process-name" -- start.
+    - if create process custome name :- pm2 start npm --name "process-name" -- start. 
+    - process name means your directory or other name like according to you.
 
     - config nginx - sudo nano /etc/nginx/sites-available/default
 
@@ -48,3 +49,9 @@
 ``` How to purchase a domain name and connect it in your website ```
     - go to any domain provider website
     - 
+
+
+
+``` Read about dotenv ```
+- Go to npm dotenv
+- read about manage multiple Environments. 
